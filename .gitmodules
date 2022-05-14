@@ -4,3 +4,6 @@
 [submodule "packages/website"]
 	path = packages/website
 	url = https://github.com/CerusBots/website
+[submodule "packages/webapp"]
+	path = packages/webapp
+	url = https://github.com/CerusBots/webapp

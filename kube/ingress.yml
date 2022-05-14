@@ -1,0 +1,40 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: cerus-ingress
+  namespace: cerusbots
+  annotations:
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: 'cerusbots.com'
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: cerus-website
+                port:
+                  number: 3000
+    - host: 'app.cerusbots.com'
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: cerus-webapp
+                port:
+                  number: 3000
+    - host: 'api.cerusbots.com'
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: cerus-api
+                port:
+                  number: 80
