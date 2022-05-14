@@ -1,0 +1,6 @@
+[submodule "packages/api"]
+	path = packages/api
+	url = https://github.com/CerusBots/api
+[submodule "packages/website"]
+	path = packages/website
+	url = https://github.com/CerusBots/website
