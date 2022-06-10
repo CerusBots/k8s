@@ -11,6 +11,10 @@
         {
             "name": "Website",
             "path": "packages/website"
-        }
+        },
+	    {
+	        "name": "Kubernetes",
+	        "path": "."
+	    }
     ]
 }
