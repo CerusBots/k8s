@@ -21,6 +21,6 @@ helm_resource('analytics', 'varac/plausible-analytics', labels=['cerus-monitorin
     '--set', 'postgresql.auth.postgresPassword=' + os.getenv('PLAUSIBLE_POSTGRESS_PASSWORD'),
     '--set', 'clickhouse.url=http://analytics-clickhouse.cerusbots.svc.cluster.local:8123/plausible_events_db'
 ])
-k8s_resource('analytics', port_forwards=['8085:8080'])
+k8s_resource('analytics', port_forwards=['8085:8000'])
 
 k8s_yaml(service_yaml('analytics-plausible-analytics-external', 'ExternalName', external_name='analytics-plausible-analytics.cerusbots.svc.cluster.local', namespace='cerusbots'))

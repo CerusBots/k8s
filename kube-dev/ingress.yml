@@ -35,7 +35,7 @@ spec:
               service:
                 name: analytics-plausible-analytics
                 port:
-                  number: 8080
+                  number: 8000
     - host: 'api.cerusbots.test'
       http:
         paths:
