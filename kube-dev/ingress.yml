@@ -1,14 +1,12 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: cerus-ingress
+  name: cerus-ingress-dev
   namespace: cerusbots
-  annotations:
-    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
 spec:
   ingressClassName: nginx
   rules:
-    - host: 'cerusbots.com'
+    - host: 'cerusbots.test'
       http:
         paths:
           - pathType: Prefix
@@ -18,7 +16,7 @@ spec:
                 name: cerus-website
                 port:
                   number: 3000
-    - host: 'app.cerusbots.com'
+    - host: 'app.cerusbots.test'
       http:
         paths:
           - pathType: Prefix
@@ -28,7 +26,7 @@ spec:
                 name: cerus-webapp
                 port:
                   number: 8080
-    - host: 'analytics.cerusbots.com'
+    - host: 'analytics.cerusbots.test'
       http:
         paths:
           - pathType: Prefix
@@ -38,7 +36,7 @@ spec:
                 name: analytics-plausible-analytics
                 port:
                   number: 8080
-    - host: 'api.cerusbots.com'
+    - host: 'api.cerusbots.test'
       http:
         paths:
           - pathType: Prefix
