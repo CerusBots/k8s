@@ -8,6 +8,9 @@ k8s_yaml('./kube/namespace.yml')
 k8s_yaml('./kube/ingress.yml')
 k8s_yaml('./kube-dev/ingress.yml')
 
+os.putenv('ENABLE_ANALYTICS', '1')
+os.putenv('ANALYTICS_URL', 'http://analytics.cerusbots.test/js/plausible.js')
+
 include('./packages/api/Tiltfile')
 include('./packages/webapp/Tiltfile')
 include('./packages/website/Tiltfile')
@@ -17,6 +20,9 @@ helm_repo('varac', 'https://0xacab.org/api/v4/projects/3963/packages/helm/stable
 helm_resource('analytics', 'varac/plausible-analytics', labels=['cerus-monitoring'], namespace='cerusbots', flags=[
     '--set', 'disabelRegistration=true',
     '--set', 'baseURL=http://analytics.cerusbots.test',
+    '--set', 'adminUser.email=' + os.getenv('PLAUSIBLE_ADMIN_EMAIL'),
+    '--set', 'adminUser.name=' + os.getenv('PLAUSIBLE_ADMIN_USERNAME'),
+    '--set', 'adminUser.password=' + os.getenv('PLAUSIBLE_ADMIN_PASSWORD'),
     '--set', 'postgresql.url=postgress://postgres:' + os.getenv('PLAUSIBLE_POSTGRESS_PASSWORD') + '@analytics-postgresql.cerusbots.svc.cluster.local:5432/plausible',
     '--set', 'postgresql.auth.postgresPassword=' + os.getenv('PLAUSIBLE_POSTGRESS_PASSWORD'),
     '--set', 'clickhouse.url=http://analytics-clickhouse.cerusbots.svc.cluster.local:8123/plausible_events_db'
