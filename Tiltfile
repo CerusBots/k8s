@@ -9,7 +9,7 @@ k8s_yaml('./kube/ingress.yml')
 k8s_yaml('./kube-dev/ingress.yml')
 
 os.putenv('ENABLE_ANALYTICS', '1')
-os.putenv('ANALYTICS_URL', 'http://analytics.cerusbots.test/js/plausible.js')
+os.putenv('ANALYTICS_HOST', 'analytics.cerusbots.test')
 
 include('./packages/api/Tiltfile')
 include('./packages/webapp/Tiltfile')
