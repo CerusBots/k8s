@@ -7,3 +7,6 @@
 [submodule "packages/webapp"]
 	path = packages/webapp
 	url = https://github.com/CerusBots/webapp
+[submodule "packages/runner"]
+	path = packages/runner
+	url = https://github.com/CerusBots/runner

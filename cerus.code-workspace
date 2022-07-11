@@ -5,6 +5,10 @@
             "path": "packages/api"
         },
         {
+            "name": "Runner",
+            "path": "packages/runner",
+        },
+        {
             "name": "Webapp",
             "path": "packages/webapp"
         },
