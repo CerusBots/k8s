@@ -1,6 +1,8 @@
 v1alpha1.extension_repo(name='default', url='file:///home/ross/tilt-extensions')
 load('ext://pulumi', 'pulumi_resource')
+load('ext://cert_manager', 'deploy_cert_manager')
 
+deploy_cert_manager()
 update_settings(k8s_upsert_timeout_secs=600)
 
 include('./packages/api/Tiltfile')

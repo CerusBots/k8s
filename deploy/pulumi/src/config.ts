@@ -12,6 +12,9 @@ export interface Configuration {
   sha: string
   hasNamespace: boolean
   domain: string
+  acme: {
+    email: string
+  }
   analytics: {
     user: {
       email: string
@@ -55,6 +58,9 @@ export function createConfig(config: Config): Configuration {
     sha,
     domain,
     hasNamespace,
+    acme: {
+      email: config.get('acme.email') || `acme@${domain}`,
+    },
     analytics: {
       user: {
         email: config.get('analytics.user.email') || `analytics@${domain}`,

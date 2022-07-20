@@ -13,9 +13,27 @@ export default function ingress(
       metadata: {
         name: 'cerus-ingress',
         namespace: config.namespace,
+        annotations: {
+          'cert-manager.io/cluster-issuer':
+            (config.dev ? 'selfsigned' : 'prod') + '-cluster-issuer',
+          'kubernetes.io/ingress.class': 'nginx',
+        },
       },
       spec: {
         ingressClassName: 'nginx',
+        tls: [
+          {
+            hosts: [
+              config.domain,
+              `app.${config.domain}`,
+              `analytics.${config.domain}`,
+              `api.${config.domain}`,
+            ],
+            secretName: config.dev
+              ? 'selfsigned-root-secret'
+              : 'letsencrypt-prod',
+          },
+        ],
         rules: [
           {
             host: config.domain,

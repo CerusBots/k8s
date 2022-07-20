@@ -1,0 +1,38 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: selfsigned-cluster-issuer
+  labels:
+    ops: cert
+spec:
+  selfSigned: {}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: selfsigned-ca
+  namespace: cerusbots
+  labels:
+    ops: cert
+spec:
+  isCA: true
+  commonName: selfsigned-ca
+  secretName: selfsigned-secret
+  privateKey:
+    algorithm: ECDSA
+    size: 256
+  issuerRef:
+    name: selfsigned-cluster-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io
+---
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: selfsigned-issuer
+  namespace: cerusbots
+  labels:
+    ops: cert
+spec:
+  ca:
+    secretName: selfsigned-secret
