@@ -16,7 +16,7 @@ export default function ingress(
         annotations: {
           'cert-manager.io/cluster-issuer':
             (config.dev ? 'selfsigned' : 'prod') + '-cluster-issuer',
-          'kubernetes.io/ingress.class': 'nginx',
+          ...(config.dev ? {} : { 'kubernetes.io/ingress.class': 'nginx' }),
         },
       },
       spec: {
