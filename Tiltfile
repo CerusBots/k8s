@@ -10,4 +10,4 @@ include('./packages/runner/Tiltfile')
 include('./packages/webapp/Tiltfile')
 include('./packages/website/Tiltfile')
 
-pulumi_resource('cerus-analytics', stack='dev', dir='deploy/pulumi', labels=['cerus'], port_forwards=['8085:8000'])
+pulumi_resource('cerus-analytics', stack='CerusBots/k8s/dev', dir='deploy/pulumi', labels=['cerus'], port_forwards=['8085:8000'])

@@ -15,6 +15,12 @@ export interface Configuration {
   acme: {
     email: string
   }
+  grafana: {
+    storage: {
+      class: string
+      size: string
+    }
+  }
   analytics: {
     user: {
       email: string
@@ -60,6 +66,12 @@ export function createConfig(config: Config): Configuration {
     hasNamespace,
     acme: {
       email: config.get('acme.email') || `acme@${domain}`,
+    },
+    grafana: {
+      storage: {
+        class: config.get('grafana.storage.class') || storageClass,
+        size: config.get('grafana.storage.size') || '1Gi',
+      },
     },
     analytics: {
       user: {
