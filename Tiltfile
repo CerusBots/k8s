@@ -11,3 +11,6 @@ include('./packages/webapp/Tiltfile')
 include('./packages/website/Tiltfile')
 
 pulumi_resource('cerus-analytics', stack='CerusBots/k8s/dev', dir='deploy/pulumi', labels=['cerus'], port_forwards=['8085:8000'])
+
+k8s_resource('cerus-api', resource_deps=['cerus-runner'])
+k8s_resource('cerus-webapp', resource_deps=['cerus-api'])
