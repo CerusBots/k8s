@@ -38,6 +38,19 @@ export const release = (
         },
         clickhouse: {
           url: `http://cerus-analytics-clickhouse.${config.namespace}.svc.cluster.local:8123/plausible_events_db`,
+          persistentVolumeClaim: {
+            enabled: true,
+            dataPersistentVolume: {
+              enabled: true,
+              storageClassName: config.clickhouse.data.storage.class,
+              storage: config.clickhouse.data.storage.size,
+            },
+            logsPersistentVolume: {
+              enabled: true,
+              storageClassName: config.clickhouse.logs.storage.class,
+              storage: config.clickhouse.logs.storage.size,
+            },
+          },
         },
       },
     },

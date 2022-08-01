@@ -15,6 +15,15 @@ export interface Configuration {
   acme: {
     email: string
   }
+  clickhouse: Record<
+    'logs' | 'data',
+    {
+      storage: {
+        class: string
+        size: string
+      }
+    }
+  >
   grafana: {
     storage: {
       class: string
@@ -66,6 +75,20 @@ export function createConfig(config: Config): Configuration {
     hasNamespace,
     acme: {
       email: config.get('acme.email') || `acme@${domain}`,
+    },
+    clickhouse: {
+      data: {
+        storage: {
+          class: config.get('clickhouse.data.storage.class') || storageClass,
+          size: config.get('clickhouse.data.storage.size') || '1Gi',
+        },
+      },
+      logs: {
+        storage: {
+          class: config.get('clickhouse.logs.storage.class') || storageClass,
+          size: config.get('clickhouse.logs.storage.size') || '1Gi',
+        },
+      },
     },
     grafana: {
       storage: {
